@@ -7,6 +7,6 @@ public static class EventManager
 {
 
     public static EventHandler OnHitSpike;
-
+    public static EventHandler<MovementMode> OnTriggerPortal;
 
 }
