@@ -11,6 +11,7 @@ public class HitDetect : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<CubeMovement>(out CubeMovement cube))
         {
+            print("hit");
             EventManager.OnHitSpike?.Invoke(cube, EventArgs.Empty);
         }
     }
