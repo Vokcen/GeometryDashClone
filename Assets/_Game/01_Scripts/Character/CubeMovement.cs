@@ -14,7 +14,7 @@ public class CubeMovement : MonoBehaviour
     [SerializeField] private float flyForce;
 
     private Rigidbody2D rb;
-    [SerializeField] private MovementMode currentMode = MovementMode.Jump; 
+    [SerializeField] private MovementMode currentMode = MovementMode.Jump;
 
 
     [SerializeField] LayerMask groundLayer;
@@ -24,25 +24,25 @@ public class CubeMovement : MonoBehaviour
 
 
 
-    private float rotationSpeed = 5.0f;  
-    private float maxRotationAngle = 30.0f;  
+    private float rotationSpeed = 5.0f;
+    private float maxRotationAngle = 30.0f;
 
     private void OnEnable()
     {
         EventManager.OnTriggerPortal += OnTriggerPortal;
     }
 
- 
+
 
     private void OnDisable()
     {
         EventManager.OnTriggerPortal -= OnTriggerPortal;
 
     }
- 
+
     private void OnTriggerPortal(object sender, MovementMode cubeNewMovementMode)
     {
-        currentMode= cubeNewMovementMode;
+        currentMode = cubeNewMovementMode;
 
     }
 
@@ -54,6 +54,8 @@ public class CubeMovement : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.GetState() != GameState.Game) return;
+
         MoveCharacter();
 
         PerformJump();
@@ -91,7 +93,7 @@ public class CubeMovement : MonoBehaviour
             if (Input.GetMouseButtonDown(0))
             {
 
-              
+
                 rb.velocity = Vector2.zero;
                 rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
@@ -101,7 +103,7 @@ public class CubeMovement : MonoBehaviour
         }
         else
         {
-            visual.Rotate(Vector3.back,452.415f*Time.deltaTime);
+            visual.Rotate(Vector3.back, 452.415f * Time.deltaTime);
         }
     }
 
@@ -111,7 +113,7 @@ public class CubeMovement : MonoBehaviour
         {
             rb.velocity = Vector2.up * flyForce;
 
-           
+
         }
         Vector2 direction = rb.velocity.normalized;
 
